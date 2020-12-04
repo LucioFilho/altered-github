@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="author" content="Lucio Patrocinio">
+   <meta name="keywords" content="Altered">
+   <meta name="description" content="Altered game. A sand box universe." />
+   <title>Altered</title>
+   <link rel="stylesheet" href="css/main.css">
+</head>
+
+<html lang="en">
+
+   <body>
+      <script src="https://d3js.org/d3.v6.js"></script>
+
+      <script>
+         // listen for a window resize event
+         window.addEventListener("resize", resizeSvg)
+
+         // set the canvas width and height based on window dimensions
+         function setCanvasSize() {
+            canvas.width = window.innerWidth - 20;
+            canvas.height = window.innerHeight - 20;
+
+         }
+
+         // resize function - called when window is resized
+         function resizeSvg() {
+            // call to set canvas size based on window dimentions
+            setCanvasSize();
+
+            // select svg and set its width and height to new dimentions
+            d3.select("#canvas")
+               .attr("width", canvas.width)
+               .attr("height", canvas.height)
+
+            // select rect and set its width and height to new dimentions
+            d3.selectAll("rect")
+               .transition()
+               .ease(d3.easeElastic)
+               .attr("width", canvas.width - margin.left - margin.right)
+               .attr("height", canvas.height - margin.top - margin.bottom)
+
+         }
+         // object to hold dimentions of window
+         var canvas = {};
+
+         // call to set canvas size based on window dimentions
+         setCanvasSize();
+
+         // margins - to offset elements inside the svg
+         var margin = {
+            top: 5,
+            bottom: 5,
+            left: 5,
+            right: 5,
+         };
+
+         // create a new svg - sized to the current window size
+         var svg = d3.select("body")
+            .append("svg")
+            .attr("id", "canvas")
+            .attr("width", canvas.width)
+            .attr("height", canvas.height)
+
+         // create a group, and shift it left and down for margins
+         var g = svg.append("g")
+            .attr("id", "Board")
+            .attr("transform", "translate(" + margin.left + ", " + margin.right + ")");
+      </script>
+
+      <script src="/socket.io/socket.io.js"></script>
+      <script src="/js/fillerstroker.js"></script>
+      <script src="/js/app.js" charset="utf-8"></script>
+
+   </body>
+
+</html>

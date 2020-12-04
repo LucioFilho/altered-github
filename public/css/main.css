@@ -1,0 +1,18 @@
+html, body {
+   font-family: "Helvetica";
+}
+
+body, .jumbotron {
+   padding: 0px;
+   background-color: rgb(100, 10, 10);
+}
+
+table, th, td {
+  border: 0px;
+  padding: 0px;
+  border-spacing: 0px;
+}
+
+svg {
+   background-color: rgb(0, 0, 0);
+}
